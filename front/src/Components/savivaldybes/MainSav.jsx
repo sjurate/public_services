@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import ClothesContext from "../../Contexts/ClothesContext";
-import CreateC from "./CreateC";
-import ListC from "./ListC";
-import EditC from "./EditC";
+import SavContext from "../../Contexts/SavContext";
+import CreateSav from "./CreateSav";
+import ListSav from "./ListSav";
+import EditSav from "./EditSav";
 import { authConfig } from "../../Functions/auth";
 
 const MainC = () => {
-  const [clothes, setClothes] = useState(null);
+  const [savivaldybes, setSavivaldybes] = useState(null);
   const [createData, setCreateData] = useState(null);
   const [deleteData, setDeleteData] = useState(null);
   const [modalData, setModalData] = useState(null);
@@ -22,7 +22,11 @@ const MainC = () => {
       return;
     }
     axios
-      .post("http://localhost:3003/server/clothes", createData, authConfig())
+      .post(
+        "http://localhost:3003/server/savivaldybes",
+        createData,
+        authConfig()
+      )
       .then((res) => {
         setLastUpdate(Date.now());
       });
@@ -32,9 +36,9 @@ const MainC = () => {
 
   useEffect(() => {
     axios
-      .get("http://localhost:3003/server/clothes", authConfig())
+      .get("http://localhost:3003/server/savivaldybes", authConfig())
       .then((res) => {
-        setClothes(res.data);
+        setSavivaldybes(res.data);
       });
   }, [lastUpdate]);
 
@@ -46,7 +50,7 @@ const MainC = () => {
     }
     axios
       .put(
-        "http://localhost:3003/server/clothes/" + editData.id,
+        "http://localhost:3003/server/savivaldybes/" + editData.id,
         editData,
         authConfig()
       )
@@ -63,7 +67,7 @@ const MainC = () => {
     }
     axios
       .delete(
-        "http://localhost:3003/server/clothes/" + deleteData.id,
+        "http://localhost:3003/server/savivaldybes/" + deleteData.id,
         authConfig()
       )
       .then((res) => {
@@ -72,10 +76,10 @@ const MainC = () => {
   }, [deleteData]);
 
   return (
-    <ClothesContext.Provider
+    <SavContext.Provider
       value={{
         setCreateData,
-        clothes,
+        savivaldybes,
         setDeleteData,
         setEditData,
         editData,
@@ -86,15 +90,15 @@ const MainC = () => {
       <div className="container">
         <div className="row">
           <div className="col col-lg-4 col-md-12">
-            <CreateC />
+            <CreateSav />
           </div>
           <div className="col col-lg-8 col-md-12 col-sm-12">
-            <ListC />
+            <ListSav />
           </div>
         </div>
       </div>
-      <EditC />
-    </ClothesContext.Provider>
+      <EditSav />
+    </SavContext.Provider>
   );
 };
 

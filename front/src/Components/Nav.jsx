@@ -7,10 +7,10 @@ function Nav({ status }) {
         <div className="col-12">
           <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
             <div className="container-fluid">
-              <span className="navbar-brand">Siuvykla</span>
+              <span className="navbar-brand">Patark Lietuvai</span>
               <div>
                 <div className="navbar-nav">
-                  {status === 2 || status === 3 || status === 4 ? (
+                  {status === 1 || status === 3 ? (
                     <NavLink
                       to="/"
                       end
@@ -21,44 +21,39 @@ function Nav({ status }) {
                       Home
                     </NavLink>
                   ) : null}
-                  {status === 2 || status === 3 || status === 4 ? (
+                  {status === 3 ? (
                     <NavLink
-                      to="/myorders"
+                      to="/savivaldybes"
                       className={({ isActive }) =>
                         isActive ? "nav-link active" : "nav-link"
                       }
                     >
-                      My Orders
+                      Savivaldybes
                     </NavLink>
                   ) : null}
                   {status === 3 ? (
                     <NavLink
-                      to="/orders"
+                      to="/sritys"
                       className={({ isActive }) =>
                         isActive ? "nav-link active" : "nav-link"
                       }
                     >
-                      Orders
+                      Sritys
                     </NavLink>
                   ) : null}
                   {status === 3 ? (
                     <NavLink
-                      to="/clothes"
+                      to="/komentarai"
                       className={({ isActive }) =>
                         isActive ? "nav-link active" : "nav-link"
                       }
                     >
-                      Clothes
+                      Komentarai
                     </NavLink>
                   ) : null}
-                  {status !== 1 ? (
+                  {status === 3 ? (
                     <NavLink to="/logout" className="nav-link">
                       Logout
-                    </NavLink>
-                  ) : null}
-                  {status === 1 ? (
-                    <NavLink to="/register" className="nav-link">
-                      Register
                     </NavLink>
                   ) : null}
                   {status === 1 ? (

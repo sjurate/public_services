@@ -1,17 +1,15 @@
 import React, { useState, useContext, useEffect, useRef } from "react";
 import getBase64 from "../../Functions/getBase64";
-import ClothesContext from "../../Contexts/ClothesContext";
+import SavContext from "../../Contexts/SavContext";
 import MessagesContext from "../../Contexts/MessagesContext";
 
-const EditC = () => {
-  const [type, setType] = useState("");
-  const [color, setColor] = useState("");
-  const [price, setPrice] = useState("");
+const EditSav = () => {
+  const [title, setTitle] = useState("");
   const [photoPrint, setPhotoPrint] = useState(null);
   const [deletePhoto, setDeletePhoto] = useState(false);
   const fileInput = useRef();
 
-  const { setEditData, setModalData, modalData } = useContext(ClothesContext);
+  const { setEditData, setModalData, modalData } = useContext(SavContext);
   const { setMsg } = useContext(MessagesContext);
 
   const handlePhoto = () => {
@@ -22,28 +20,14 @@ const EditC = () => {
       });
   };
 
-  const editClothesItem = () => {
-    if (type.length === 0 || type.length > 50) {
+  const editSavivaldybe = () => {
+    if (title.length === 0 || title.length > 50) {
       setMsg("Invalid title");
-      return;
-    }
-    if (price.replace(/[^\d.]/, "") !== price || price.length === 0) {
-      setMsg("Invalid price");
-      return;
-    }
-    if (color.length === 0) {
-      setMsg("Must enter a color");
-      return;
-    }
-    if (parseFloat(price) > 99.99) {
-      setMsg("Max price is 99.99 Eur");
       return;
     }
     setEditData({
       id: modalData.id,
-      type,
-      color,
-      price: parseFloat(price),
+      title,
       deletePhoto: deletePhoto ? 1 : 0,
       image: photoPrint,
     });
@@ -55,9 +39,7 @@ const EditC = () => {
     if (modalData === null) {
       return;
     }
-    setType(modalData.type);
-    setColor(modalData.color);
-    setPrice(modalData.price);
+    setTitle(modalData.title);
     setPhotoPrint(modalData.image);
     setDeletePhoto(false);
   }, [modalData]);
@@ -71,7 +53,7 @@ const EditC = () => {
       <div className="modal-dialog modal-dialog-centered">
         <div className="modal-content">
           <div className="modal-header">
-            <h5 className="modal-title">Edit Clothes Item</h5>
+            <h5 className="modal-title">Koreguoti savivaldybę</h5>
             <button
               onClick={() => setModalData(null)}
               type="button"
@@ -82,34 +64,16 @@ const EditC = () => {
           <div className="card m-4">
             <div className="card-body">
               <div className="mb-3">
-                <label className="form-label">Type</label>
+                <label className="form-label">Pavadinimas</label>
                 <input
                   type="text"
                   className="form-control"
-                  value={type}
-                  onChange={(e) => setType(e.target.value)}
+                  value={title}
+                  onChange={(e) => setTitle(e.target.value)}
                 />
               </div>
               <div className="mb-3">
-                <label className="form-label">Color</label>
-                <input
-                  type="text"
-                  className="form-control"
-                  value={color}
-                  onChange={(e) => setColor(e.target.value)}
-                />
-              </div>
-              <div className="mb-3">
-                <label className="form-label">Price</label>
-                <input
-                  type="text"
-                  className="form-control"
-                  value={price}
-                  onChange={(e) => setPrice(e.target.value)}
-                />
-              </div>
-              <div className="mb-3">
-                <label className="form-label">Image</label>
+                <label className="form-label">Herbo nuotrauka</label>
                 <input
                   ref={fileInput}
                   type="file"
@@ -119,7 +83,7 @@ const EditC = () => {
               </div>
               {photoPrint ? (
                 <div className="img-bin">
-                  <label htmlFor="image-delete">Delete image</label>
+                  <label htmlFor="image-delete">Ištrinti nuotrauką</label>
                   <input
                     id="image-delete"
                     type="checkbox"
@@ -130,11 +94,11 @@ const EditC = () => {
                 </div>
               ) : null}
               <button
-                onClick={editClothesItem}
+                onClick={editSavivaldybe}
                 type="button"
                 className="btn btn-outline-success"
               >
-                Save
+                Išsaugoti
               </button>
             </div>
           </div>
@@ -144,4 +108,4 @@ const EditC = () => {
   );
 };
 
-export default EditC;
+export default EditSav;

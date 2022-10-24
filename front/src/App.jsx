@@ -11,12 +11,8 @@ import {
 import "./App.scss";
 import Nav from "./Components/Nav";
 import Home from "./Components/home/MainH";
-import Clothes from "./Components/clothes/MainC";
-import Orders from "./Components/orders/MainO";
-import MyOrders from "./Components/myorders/MainMO";
 import LoginPage from "./Components/loging/LoginPage";
 import LogoutPage from "./Components/loging/LogoutPage";
-import RegisterPage from "./Components/register/MainR";
 import Messages from "./Components/Messages";
 import { authConfig } from "./Functions/auth";
 import MessagesContext from "./Contexts/MessagesContext";
@@ -53,10 +49,26 @@ function App() {
             }
           ></Route>
           <Route
-            path="/myorders"
+            path="/savivaldybes"
             element={
-              <RequireAuth role="user">
-                <MyOrders />
+              <RequireAuth role="admin">
+                <Savivaldybes />
+              </RequireAuth>
+            }
+          ></Route>
+          <Route
+            path="/sritys"
+            element={
+              <RequireAuth role="admin">
+                <Sritys />
+              </RequireAuth>
+            }
+          ></Route>
+          <Route
+            path="/komentarai"
+            element={
+              <RequireAuth role="admin">
+                <Komentarai />
               </RequireAuth>
             }
           ></Route>
@@ -67,26 +79,6 @@ function App() {
           <Route
             path="/logout"
             element={<LogoutPage setRoleChange={setRoleChange} />}
-          />
-          <Route
-            path="/clothes"
-            element={
-              <RequireAuth role="admin">
-                <Clothes />
-              </RequireAuth>
-            }
-          ></Route>
-          <Route
-            path="/orders"
-            element={
-              <RequireAuth role="admin">
-                <Orders />
-              </RequireAuth>
-            }
-          ></Route>
-          <Route
-            path="/register"
-            element={<RegisterPage setRoleChange={setRoleChange} />}
           />
         </Routes>
       </MessagesContext.Provider>
