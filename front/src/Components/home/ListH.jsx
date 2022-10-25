@@ -2,39 +2,21 @@ import React, { useContext, useEffect, useState } from "react";
 import HomeContext from "../../Contexts/HomeContext";
 import LineH from "./LineH";
 
-const sortData = [
-  { v: "default", t: "Default" },
-  { v: "price_asc", t: "Price 1-9" },
-  { v: "price_desc", t: "Price 9-1" },
-];
-
 const ListH = () => {
-  const [sortBy, setSortBy] = useState("default");
-
-  const { clothes, setClothes, filterOn, filterWhat } = useContext(HomeContext);
+  const { komentarai, setKomentarai, filterOn, filterWhat } =
+    useContext(HomeContext);
 
   const resetFilter = () => {
-    setClothes((prevClothes) => prevClothes.map((c) => ({ ...c, show: true })));
+    setKomentarai((prevClothes) =>
+      prevClothes.map((c) => ({ ...c, show: true }))
+    );
     filterOn.current = false;
     filterWhat.current = null;
   };
 
-  useEffect(() => {
-    switch (sortBy) {
-      case "price_asc":
-        setClothes((c) => [...c].sort((a, b) => a.price - b.price));
-        break;
-      case "price_desc":
-        setClothes((c) => [...c].sort((b, a) => a.price - b.price));
-        break;
-      default:
-        setClothes((c) => [...(c ?? [])].sort((a, b) => a.row - b.row));
-    }
-  }, [sortBy, setClothes]);
-
   return (
     <>
-      <div className="card m-4">
+      {/* <div className="card m-4">
         <h5 className="card-header">Sort</h5>
         <div className="card-body">
           <div className="mb-3">
@@ -52,19 +34,18 @@ const ListH = () => {
             </select>
           </div>
         </div>
-      </div>
+      </div> */}
       <div className="card m-4">
-        <h5 className="card-header">Clothes List</h5>
+        <h5 className="card-header">Komentarai:</h5>
         <div className="card-small-info">
-          <small> Click on item title or color to filter </small>
           <small onClick={resetFilter} className="click-link">
-            (show all clothes)
+            (rodyti visus komentarus)
           </small>
         </div>
         <div className="card-body">
           <ul className="list-group">
-            {clothes?.map((c) =>
-              c.show ? <LineH key={c.id} clothe={c} /> : null
+            {komentarai?.map((k) =>
+              k.show ? <LineH key={k.id} komentaras={k} /> : null
             )}
           </ul>
         </div>

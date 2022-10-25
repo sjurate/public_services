@@ -69,67 +69,107 @@ const handleAuth = function (req, res, next) {
 
 app.use(handleAuth);
 
-// AUTH
-// app.get("/login-check", (req, res) => {
-//   const sql = `
-//          SELECT
-//          name, role
-//          FROM users
-//          WHERE session = ?
-//         `;
-//   con.query(sql, [req.headers["authorization"] || ""], (err, result) => {
-//     if (err) throw err;
-//     if (!result.length) {
-//       res.send({ msg: "error", status: 1 }); // user not logged
-//     } else {
-//       if (req.query.role === "admin") {
-//         if (result[0].role !== 10) {
-//           res.send({ msg: "error", status: 2 }); // not an admin
-//         } else {
-//           res.send({ msg: "ok", status: 3 }); // is admin
-//         }
-//       } else {
-//         res.send({ msg: "ok", status: 4 }); // is user
-//       }
-//     }
-//   });
-// });
+AUTH;
+app.get("/login-check", (req, res) => {
+  const sql = `
+         SELECT
+         name, role
+         FROM users
+         WHERE session = ?
+        `;
+  con.query(sql, [req.headers["authorization"] || ""], (err, result) => {
+    if (err) throw err;
+    if (!result.length) {
+      res.send({ msg: "error", status: 1 }); // user not logged
+    } else {
+      if (req.query.role === "admin") {
+        if (result[0].role !== 10) {
+          res.send({ msg: "error", status: 2 }); // not an admin
+        } else {
+          res.send({ msg: "ok", status: 3 }); // is admin
+        }
+      } else {
+        res.send({ msg: "ok", status: 4 }); // is user
+      }
+    }
+  });
+});
 
-// app.post("/login", (req, res) => {
-//   const key = uuid.v4();
-//   const sql = `
-//     UPDATE users
-//     SET session = ?
-//     WHERE name = ? AND psw = ?
-//   `;
-//   con.query(sql, [key, req.body.user, md5(req.body.pass)], (err, result) => {
-//     if (err) throw err;
-//     if (!result.affectedRows) {
-//       res.send({ msg: "error", key: "" });
-//     } else {
-//       res.send({ msg: "ok", key });
-//     }
-//   });
-// });
+app.post("/login", (req, res) => {
+  const key = uuid.v4();
+  const sql = `
+    UPDATE users
+    SET session = ?
+    WHERE name = ? AND psw = ?
+  `;
+  con.query(sql, [key, req.body.user, md5(req.body.pass)], (err, result) => {
+    if (err) throw err;
+    if (!result.affectedRows) {
+      res.send({ msg: "error", key: "" });
+    } else {
+      res.send({ msg: "ok", key });
+    }
+  });
+});
 
 /////////////////// LOGIN   END ////////////////////
 
-// // CREATE ITEM of clothes FOR ADMIN
+//  CREATE SAVIVALDYBE for admin
 
-// app.post("/server/clothes", (req, res) => {
-//   const sql = `
-//     INSERT INTO clothes (type, color, price, image)
-//     VALUES (?, ?, ?, ?)
-//     `;
-//   con.query(
-//     sql,
-//     [req.body.type, req.body.color, req.body.price, req.body.image],
-//     (err, result) => {
-//       if (err) throw err;
-//       res.send(result);
-//     }
-//   );
-// });
+app.post("/home/savivaldybes", (req, res) => {
+  const sql = `
+    INSERT INTO savivaldybes (title, image)
+    VALUES (?, ?)
+    `;
+  con.query(sql, [req.body.title, req.body.image], (err, result) => {
+    if (err) throw err;
+    res.send(result);
+  });
+});
+
+// READ SAVIVALDYBES for admin
+
+app.get("/home/savivaldybes", (req, res) => {
+  const sql = `
+    SELECT *
+    FROM savivaldybes
+    `;
+  con.query(sql, (err, result) => {
+    if (err) throw err;
+    res.send(result);
+  });
+});
+
+// UPDATE SAVIVALDYBE for admin
+
+app.put("/home/savivaldybes/:id", (req, res) => {
+  const sql = `
+    UPDATE savivaldybes
+    SET title = ?, image = ?
+    WHERE id = ?
+    `;
+  con.query(
+    sql,
+    [req.body.title, req.body.image, req.params.id],
+    (err, result) => {
+      if (err) throw err;
+      res.send(result);
+    }
+  );
+});
+
+// DELETE SAVIVALDYBE for admin
+
+app.delete("/home/savivaldybes/:id", (req, res) => {
+  const sql = `
+    DELETE FROM savivaldybes
+    WHERE id = ?
+    `;
+  con.query(sql, [req.params.id], (err, result) => {
+    if (err) throw err;
+    res.send(result);
+  });
+});
 
 // // CREATE an ORDER (for users (at homepage))
 

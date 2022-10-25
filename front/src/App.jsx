@@ -11,6 +11,9 @@ import {
 import "./App.scss";
 import Nav from "./Components/Nav";
 import Home from "./Components/home/MainH";
+import Savivaldybes from "./Components/savivaldybes/MainSav";
+import Sritys from "./Components/sritys/MainSritis";
+import Komentarai from "./Components/komentarai/MainKom";
 import LoginPage from "./Components/loging/LoginPage";
 import LogoutPage from "./Components/loging/LogoutPage";
 import Messages from "./Components/Messages";

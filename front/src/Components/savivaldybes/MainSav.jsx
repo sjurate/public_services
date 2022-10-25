@@ -22,11 +22,7 @@ const MainC = () => {
       return;
     }
     axios
-      .post(
-        "http://localhost:3003/server/savivaldybes",
-        createData,
-        authConfig()
-      )
+      .post("http://localhost:3003/home/savivaldybes", createData, authConfig())
       .then((res) => {
         setLastUpdate(Date.now());
       });
@@ -36,7 +32,7 @@ const MainC = () => {
 
   useEffect(() => {
     axios
-      .get("http://localhost:3003/server/savivaldybes", authConfig())
+      .get("http://localhost:3003/home/savivaldybes", authConfig())
       .then((res) => {
         setSavivaldybes(res.data);
       });
@@ -50,7 +46,7 @@ const MainC = () => {
     }
     axios
       .put(
-        "http://localhost:3003/server/savivaldybes/" + editData.id,
+        "http://localhost:3003/home/savivaldybes/" + editData.id,
         editData,
         authConfig()
       )
@@ -67,7 +63,7 @@ const MainC = () => {
     }
     axios
       .delete(
-        "http://localhost:3003/server/savivaldybes/" + deleteData.id,
+        "http://localhost:3003/home/savivaldybes/" + deleteData.id,
         authConfig()
       )
       .then((res) => {
