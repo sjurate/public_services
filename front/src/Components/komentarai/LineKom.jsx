@@ -20,7 +20,7 @@ const LineKom = ({ komentaras }) => {
       <ul className="comment">
         <li key={komentaras.id} className="list-group-item">
           <h3>Komentaras # {komentaras.id}</h3>
-          <div>{o.type}</div>
+
           <div className="comment-details">
             <div>{komentaras.savivaldybe}</div>
             <div>{komentaras.sritis}</div>

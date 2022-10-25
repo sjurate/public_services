@@ -69,7 +69,7 @@ const handleAuth = function (req, res, next) {
 
 app.use(handleAuth);
 
-AUTH;
+// AUTH;
 app.get("/login-check", (req, res) => {
   const sql = `
          SELECT
@@ -127,7 +127,7 @@ app.post("/home/savivaldybes", (req, res) => {
   });
 });
 
-// READ SAVIVALDYBES for admin
+// READ SAVIVALDYBES for admin and users
 
 app.get("/home/savivaldybes", (req, res) => {
   const sql = `
@@ -166,6 +166,91 @@ app.delete("/home/savivaldybes/:id", (req, res) => {
     WHERE id = ?
     `;
   con.query(sql, [req.params.id], (err, result) => {
+    if (err) throw err;
+    res.send(result);
+  });
+});
+
+//  CREATE SRITIS for admin
+
+app.post("/home/sritys", (req, res) => {
+  const sql = `
+    INSERT INTO sritys (title)
+    VALUES (?)
+    `;
+  con.query(sql, [req.body.title], (err, result) => {
+    if (err) throw err;
+    res.send(result);
+  });
+});
+
+// READ SRITYS for admin and users
+
+app.get("/home/sritys", (req, res) => {
+  const sql = `
+    SELECT *
+    FROM sritys
+    `;
+  con.query(sql, (err, result) => {
+    if (err) throw err;
+    res.send(result);
+  });
+});
+
+// UPDATE SRITIS for admin
+
+app.put("/home/sritys/:id", (req, res) => {
+  const sql = `
+    UPDATE sritys
+    SET title = ?
+    WHERE id = ?
+    `;
+  con.query(sql, [req.body.title, req.params.id], (err, result) => {
+    if (err) throw err;
+    res.send(result);
+  });
+});
+
+// DELETE SAVIVALDYBE for admin
+
+app.delete("/home/sritys/:id", (req, res) => {
+  const sql = `
+    DELETE FROM sritys
+    WHERE id = ?
+    `;
+  con.query(sql, [req.params.id], (err, result) => {
+    if (err) throw err;
+    res.send(result);
+  });
+});
+
+// CREATE KOMENTARAS
+
+app.post("/home/komentarai", (req, res) => {
+  const sql = `
+    INSERT INTO komentarai (post, savivaldybe_id, sritis_id)
+    VALUES (?, ?, ?)
+    `;
+  con.query(
+    sql,
+    [req.body.post, req.body.savivaldybe, req.body.sritis],
+    (err, result) => {
+      if (err) throw err;
+      res.send(result);
+    }
+  );
+});
+
+// READ KOMENTARAI
+
+app.get("/home/komentarai", (req, res) => {
+  const sql = `
+  SELECT k.*, s.title AS savivaldybeTitle, s.id AS sid
+  FROM komentarai AS k
+  INNER JOIN savivaldybes AS s
+  ON k.savivaldybe_id = s.id
+  `;
+  con.query(sql, (err, result) => {
     if (err) throw err;
     res.send(result);
   });

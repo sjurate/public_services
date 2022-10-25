@@ -22,7 +22,7 @@ const MainSritis = () => {
       return;
     }
     axios
-      .post("http://localhost:3003/server/sritys", createData, authConfig())
+      .post("http://localhost:3003/home/sritys", createData, authConfig())
       .then((res) => {
         setLastUpdate(Date.now());
       });
@@ -31,11 +31,9 @@ const MainSritis = () => {
   // READ ITEMS
 
   useEffect(() => {
-    axios
-      .get("http://localhost:3003/server/sritys", authConfig())
-      .then((res) => {
-        setSritys(res.data);
-      });
+    axios.get("http://localhost:3003/home/sritys", authConfig()).then((res) => {
+      setSritys(res.data);
+    });
   }, [lastUpdate]);
 
   // UPDATE ITEM
@@ -46,7 +44,7 @@ const MainSritis = () => {
     }
     axios
       .put(
-        "http://localhost:3003/server/sritys/" + editData.id,
+        "http://localhost:3003/home/sritys/" + editData.id,
         editData,
         authConfig()
       )
@@ -63,7 +61,7 @@ const MainSritis = () => {
     }
     axios
       .delete(
-        "http://localhost:3003/server/sritys/" + deleteData.id,
+        "http://localhost:3003/home/sritys/" + deleteData.id,
         authConfig()
       )
       .then((res) => {

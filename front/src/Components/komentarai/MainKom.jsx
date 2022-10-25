@@ -40,7 +40,7 @@ const MainKomentarai = () => {
     }
     axios
       .put(
-        "http://localhost:3003/server/komentarai/" + komentaras.id,
+        "http://localhost:3003/home/komentarai/" + komentaras.id,
         komentaras,
         authConfig()
       )
@@ -57,7 +57,7 @@ const MainKomentarai = () => {
     }
     axios
       .delete(
-        "http://localhost:3003/server/komentarai/" + deleteData.id,
+        "http://localhost:3003/home/komentarai/" + deleteData.id,
         authConfig()
       )
       .then((res) => {

@@ -17,18 +17,16 @@ const MainH = () => {
 
   useEffect(() => {
     axios
-      .get("http://localhost:3003/server/savivaldybes", authConfig())
+      .get("http://localhost:3003/home/savivaldybes", authConfig())
       .then((res) => {
         setSavivaldybes(res.data);
       });
   }, []);
 
   useEffect(() => {
-    axios
-      .get("http://localhost:3003/server/sritys", authConfig())
-      .then((res) => {
-        setSritys(res.data);
-      });
+    axios.get("http://localhost:3003/home/sritys", authConfig()).then((res) => {
+      setSritys(res.data);
+    });
   }, []);
 
   useEffect(() => {
@@ -92,7 +90,6 @@ const MainH = () => {
             <ListH />
           </div>
         </div>
-        <CreateH />
       </div>
     </HomeContext.Provider>
   );
