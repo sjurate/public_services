@@ -1,19 +1,20 @@
-import React, { useContext, useState, useEffect } from "react";
+import React, { useContext, useState } from "react";
 import HomeContext from "../../Contexts/HomeContext";
+
 // import MessagesContext from "../../Contexts/MessagesContext";
 
 const CreateH = () => {
-  const [savivaldybe, setSavivaldybe] = useState("");
-  const [sritis, setSritis] = useState("");
+  const [savivaldybe, setSavivaldybe] = useState(0);
+  const [sritis, setSritis] = useState(0);
   const [post, setPost] = useState("");
 
-  const { setCreateData, sritys, savivaldybes } = useContext(HomeContext);
+  const { setCreateData, savivaldybes, sritys } = useContext(HomeContext);
   //const { setMsg } = useContext(MessagesContext);
 
   const addKomentaras = () => {
     setCreateData({
-      savivaldybe: parseInt(savivaldybe),
-      sritis: parseInt(sritis),
+      savivaldybe_id: savivaldybe,
+      sritis_id: sritis,
       post,
     });
     setSavivaldybe("");

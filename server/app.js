@@ -131,7 +131,7 @@ app.post("/home/savivaldybes", (req, res) => {
 
 app.get("/home/savivaldybes", (req, res) => {
   const sql = `
-    SELECT *
+    SELECT id, title, image
     FROM savivaldybes
     `;
   con.query(sql, (err, result) => {
@@ -188,7 +188,7 @@ app.post("/home/sritys", (req, res) => {
 
 app.get("/home/sritys", (req, res) => {
   const sql = `
-    SELECT *
+    SELECT id, title
     FROM sritys
     `;
   con.query(sql, (err, result) => {
@@ -233,7 +233,7 @@ app.post("/home/komentarai", (req, res) => {
     `;
   con.query(
     sql,
-    [req.body.post, req.body.savivaldybe, req.body.sritis],
+    [req.body.post, req.body.savivaldybe_id, req.body.sritis_id],
     (err, result) => {
       if (err) throw err;
       res.send(result);

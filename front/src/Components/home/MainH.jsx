@@ -56,22 +56,19 @@ const MainH = () => {
       return;
     }
     axios
-      .post(
-        "http://localhost:3003/home/komentarai/" + createData.id,
-        createData,
-        authConfig()
-      )
+      .post("http://localhost:3003/home/komentarai", createData, authConfig())
       .then((res) => {
         setLastUpdate(Date.now());
       });
+    console.log(createData);
   }, [createData]);
 
   return (
     <HomeContext.Provider
       value={{
         komentarai,
-        sritys,
         savivaldybes,
+        sritys,
         setKomentarai,
         setCreateData,
         createData,
@@ -82,7 +79,7 @@ const MainH = () => {
       <div className="container">
         <div className="row">
           <div className="col col-lg-10 col-md-10 col-sm-12">
-            <CreateH />
+            <CreateH savivaldybes={savivaldybes} />
           </div>
         </div>
         <div className="row">
