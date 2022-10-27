@@ -10,23 +10,9 @@ const MainKomentarai = () => {
   const [deleteData, setDeleteData] = useState(null);
   const [lastUpdate, setLastUpdate] = useState(Date.now());
 
-  // const reList = (data) => {
-  //   const d = new Map();
-  //   data.forEach((line) => {
-  //     if (d.has(line.id)) {
-  //       d.set(line.id, [...d.get(line.id), line]);
-  //     } else {
-  //       d.set(line.id, [line]);
-  //     }
-  //   });
-  //   return [...d];
-  // };
-
-  // READ for list of KOMENTARAI (for admin)
-
   useEffect(() => {
     axios
-      .get("http://localhost:3003/home/komentarai", authConfig())
+      .get("http://localhost:3003/server/komentarai", authConfig())
       .then((res) => {
         setKomentarai(res.data);
       });
@@ -57,7 +43,7 @@ const MainKomentarai = () => {
     }
     axios
       .delete(
-        "http://localhost:3003/home/komentarai/" + deleteData.id,
+        "http://localhost:3003/server/komentarai/" + deleteData.id,
         authConfig()
       )
       .then((res) => {

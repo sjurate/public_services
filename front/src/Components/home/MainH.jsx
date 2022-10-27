@@ -33,19 +33,8 @@ const MainH = () => {
     axios
       .get("http://localhost:3003/home/komentarai", authConfig())
       .then((res) => {
-        if (filterOn.current) {
-          setKomentarai(
-            res.data.map((d, i) =>
-              filterWhat.current === d.type
-                ? { ...d, show: true, row: i }
-                : { ...d, show: false, row: i }
-            )
-          );
-          console.log(`atrenka: `);
-        } else {
-          setKomentarai(res.data.map((d, i) => ({ ...d, show: true, row: i })));
-          console.log(res.data);
-        }
+        setKomentarai(res.data.map((d, i) => ({ ...d, show: true, row: i })));
+        console.log(res.data);
       });
   }, [lastUpdate]);
 

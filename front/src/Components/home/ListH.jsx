@@ -3,38 +3,97 @@ import HomeContext from "../../Contexts/HomeContext";
 import LineH from "./LineH";
 
 const ListH = () => {
-  const { komentarai, setKomentarai, filterOn, filterWhat } =
-    useContext(HomeContext);
+  const [savivaldybeId, setSavivaldybeId] = useState(0);
+  const [sritisId, setSritisId] = useState(0);
+
+  const {
+    komentarai,
+    setKomentarai,
+    savivaldybes,
+    sritys,
+    filterOn,
+    filterWhat,
+  } = useContext(HomeContext);
+
+  // useEffect(() => {
+  //   setKomentarai((prevKom) =>
+  //     prevKom?.map((k) =>
+  //       Number(k.sid) === Number(savivaldybeId) &&
+  //       (Number(k.srid) === Number(sritisId) || sritisId === 0)
+  //         ? { ...k, show: true }
+  //         : { ...k, show: false }
+  //     )
+  //   );
+  // }, [savivaldybeId, sritisId, setKomentarai]);
+
+  useEffect(() => {
+    setKomentarai((prevKom) =>
+      prevKom?.map((k) =>
+        (Number(k.srid) === Number(sritisId) || Number(sritisId) === 0) &&
+        (Number(k.sid) === Number(savivaldybeId) || Number(savivaldybeId) === 0)
+          ? { ...k, show: true }
+          : { ...k, show: false }
+      )
+    );
+  }, [sritisId, savivaldybeId, setKomentarai]);
+
+  // const filtruoti = () => {
+  //   setKomentarai((prevKom) =>
+  //     prevKom?.map((k) =>
+  //       (Number(k.srid) === Number(sritisId) || sritisId === 0) &&
+  //       (Number(k.sid) === Number(savivaldybeId) || savivaldybeId === 0)
+  //         ? { ...k, show: true }
+  //         : { ...k, show: false }
+  //     )
+  //   );
+  // };
 
   const resetFilter = () => {
-    setKomentarai((prevClothes) =>
-      prevClothes.map((c) => ({ ...c, show: true }))
-    );
+    setKomentarai((prevKom) => prevKom.map((c) => ({ ...c, show: true })));
     filterOn.current = false;
     filterWhat.current = null;
   };
 
   return (
     <>
-      {/* <div className="card m-4">
-        <h5 className="card-header">Sort</h5>
+      <div className="card m-4">
+        <h5 className="card-header">Filtruoti</h5>
         <div className="card-body">
           <div className="mb-3">
-            <label className="form-label">Sort By</label>
+            <label className="form-label">Pagal savivaldybę</label>
             <select
               className="form-select"
-              value={sortBy}
-              onChange={(e) => setSortBy(e.target.value)}
+              value={savivaldybeId}
+              onChange={(e) => setSavivaldybeId(e.target.value)}
             >
-              {sortData.map((c) => (
-                <option key={c.v} value={c.v}>
-                  {c.t}
+              <option value={0}>Visos savivaldybės</option>
+              {savivaldybes?.map((s) => (
+                <option key={s.id} value={s.id}>
+                  {s.title}
                 </option>
               ))}
             </select>
           </div>
+          <div className="mb-3">
+            <label className="form-label">Pagal sritį</label>
+            <select
+              className="form-select"
+              value={sritisId}
+              onChange={(e) => setSritisId(e.target.value)}
+            >
+              <option value={0}>Visos sritys</option>
+              {sritys?.map((s) => (
+                <option key={s.id} value={s.id}>
+                  {s.title}
+                </option>
+              ))}
+            </select>
+          </div>
+          {/* <button className="btn btn-outline-success" onClick={filtruoti}>
+            Filtruoti
+          </button> */}
         </div>
-      </div> */}
+      </div>
       <div className="card m-4">
         <h5 className="card-header">Komentarai:</h5>
         <div className="card-small-info">

@@ -22,8 +22,11 @@ const LineKom = ({ komentaras }) => {
           <h3>Komentaras # {komentaras.id}</h3>
 
           <div className="comment-details">
-            <div>{komentaras.savivaldybe}</div>
-            <div>{komentaras.sritis}</div>
+            <div>{komentaras.savivaldybeTitle}</div>
+            <div>{komentaras.sritisTitle}</div>
+          </div>
+          <div className="comment-post">
+            <div>{komentaras.post}</div>
           </div>
           <div className="comment-status">
             {komentaras.status === 0 ? (

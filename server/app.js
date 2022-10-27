@@ -211,7 +211,7 @@ app.put("/home/sritys/:id", (req, res) => {
   });
 });
 
-// DELETE SAVIVALDYBE for admin
+// DELETE SRITIS for admin
 
 app.delete("/home/sritys/:id", (req, res) => {
   const sql = `
@@ -241,16 +241,63 @@ app.post("/home/komentarai", (req, res) => {
   );
 });
 
-// READ KOMENTARAI
+// READ KOMENTARAI viesas
 
 app.get("/home/komentarai", (req, res) => {
   const sql = `
-  SELECT k.*, s.title AS savivaldybeTitle, s.id AS sid
+  SELECT k.*, s.title AS savivaldybeTitle, s.id AS sid, sr.title AS sritisTitle, sr.id AS srid
   FROM komentarai AS k
   INNER JOIN savivaldybes AS s
   ON k.savivaldybe_id = s.id
+  INNER JOIN sritys AS sr
+  ON k.sritis_id = sr.id
+  WHERE k.status = 1
   `;
   con.query(sql, (err, result) => {
+    if (err) throw err;
+    res.send(result);
+  });
+});
+
+// READ KOMENTARAI for admin
+
+app.get("/server/komentarai", (req, res) => {
+  const sql = `
+  SELECT k.*, s.title AS savivaldybeTitle, s.id AS sid, sr.title AS sritisTitle, sr.id AS srid
+  FROM komentarai AS k
+  INNER JOIN savivaldybes AS s
+  ON k.savivaldybe_id = s.id
+  INNER JOIN sritys AS sr
+  ON k.sritis_id = sr.id
+  `;
+  con.query(sql, (err, result) => {
+    if (err) throw err;
+    res.send(result);
+  });
+});
+
+// UPDATE KOMENTARAS for admin
+
+app.put("/home/komentarai/:id", (req, res) => {
+  const sql = `
+    UPDATE komentarai
+    SET status = ?
+    WHERE id = ?
+    `;
+  con.query(sql, [req.body.status, req.params.id], (err, result) => {
+    if (err) throw err;
+    res.send(result);
+  });
+});
+
+// DELETE KOMENTARAS for admin
+
+app.delete("/server/komentarai/:id", (req, res) => {
+  const sql = `
+    DELETE FROM komentarai
+    WHERE id = ?
+    `;
+  con.query(sql, [req.params.id], (err, result) => {
     if (err) throw err;
     res.send(result);
   });
