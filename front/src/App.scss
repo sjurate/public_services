@@ -10,8 +10,28 @@
   gap: 6px;
   flex-wrap: wrap;
   min-height: 200px;
-  & .line__content__image {
-    min-width: 200px;
+  & .line__content__info {
+    text-transform: uppercase;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    padding: 15px;
+    & .line__content__savivaldybe {
+      display: flex;
+      & .line__image {
+        width: auto;
+        height: 60px;
+        contain: content;
+      }
+      & .savivaldybe_title {
+        margin-left: 15px;
+      }
+    }
+  }
+  & .line__content__post {
+    border: dotted 2px orange;
+    width: 100%;
+    padding: 0 15px 15px 15px;
   }
 }
 

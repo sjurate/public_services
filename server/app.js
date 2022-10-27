@@ -245,7 +245,7 @@ app.post("/home/komentarai", (req, res) => {
 
 app.get("/home/komentarai", (req, res) => {
   const sql = `
-  SELECT k.*, s.title AS savivaldybeTitle, s.id AS sid, sr.title AS sritisTitle, sr.id AS srid
+  SELECT k.*, s.title AS savivaldybeTitle, s.id AS sid, s.image AS savivaldybeImage, sr.title AS sritisTitle, sr.id AS srid
   FROM komentarai AS k
   INNER JOIN savivaldybes AS s
   ON k.savivaldybe_id = s.id

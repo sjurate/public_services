@@ -47,7 +47,14 @@ const LineH = ({ komentaras }) => {
               className="line__content__savivaldybe click-link"
               onClick={filterBySavivaldybe}
             >
-              {komentaras.savivaldybeTitle}
+              <img
+                className="line__image"
+                src={komentaras.savivaldybeImage}
+                alt={komentaras.savivaldybeTitle}
+              ></img>
+              <div className="savivaldybe_title">
+                {komentaras.savivaldybeTitle}
+              </div>
             </div>
             <div
               className="line__content__sritis click-link"
@@ -55,8 +62,8 @@ const LineH = ({ komentaras }) => {
             >
               {komentaras.sritisTitle}
             </div>
-            <div className="line__content__post">{komentaras.post}</div>
           </div>
+          <div className="line__content__post">{komentaras.post}</div>
         </div>
       </div>
     </li>
