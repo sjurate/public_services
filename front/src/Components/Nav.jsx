@@ -1,13 +1,22 @@
 import { NavLink } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 function Nav({ status }) {
+  const navigate = useNavigate();
+
+  const goHome = () => {
+    navigate("/", { replace: true });
+  };
+
   return (
     <div className="container">
       <div className="row">
         <div className="col-12">
           <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
             <div className="container-fluid">
-              <span className="navbar-brand">Patark Lietuvai</span>
+              <span className="navbar-brand" onClick={goHome}>
+                Patark Lietuvai
+              </span>
               <div>
                 <div className="navbar-nav">
                   {status === 1 || status === 3 ? (

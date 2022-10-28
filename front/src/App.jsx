@@ -43,14 +43,7 @@ function App() {
         <ShowNav roleChange={roleChange} />
         <Messages />
         <Routes>
-          <Route
-            path="/"
-            element={
-              <RequireAuth role="user">
-                <Home />
-              </RequireAuth>
-            }
-          ></Route>
+          <Route path="/" element={<Home />}></Route>
           <Route
             path="/savivaldybes"
             element={
