@@ -9,8 +9,8 @@ const CreateSritis = () => {
   const { setMsg } = useContext(MessagesContext);
 
   const addSritis = () => {
-    if (title.length === 0 || title.length > 50) {
-      setMsg("Invalid title");
+    if (title.length === 0 || title.length > 30) {
+      setMsg("Neteisingai įvedėte sritį");
       return;
     } else {
       setCreateData({

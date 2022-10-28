@@ -1,7 +1,6 @@
 import React, { useContext, useState } from "react";
 import HomeContext from "../../Contexts/HomeContext";
-
-// import MessagesContext from "../../Contexts/MessagesContext";
+import MessagesContext from "../../Contexts/MessagesContext";
 
 const CreateH = () => {
   const [savivaldybe, setSavivaldybe] = useState(0);
@@ -9,9 +8,21 @@ const CreateH = () => {
   const [post, setPost] = useState("");
 
   const { setCreateData, savivaldybes, sritys } = useContext(HomeContext);
-  //const { setMsg } = useContext(MessagesContext);
+  const { setMsg } = useContext(MessagesContext);
 
   const addKomentaras = () => {
+    if (savivaldybe === 0) {
+      setMsg("Pasirinkite savivaldybę");
+      return;
+    }
+    if (sritis === 0) {
+      setMsg("Pasirinkite sritį");
+      return;
+    }
+    if (post.length === 0) {
+      setMsg("Neįrašėte jokio komentaro / pasiūlymo");
+      return;
+    }
     setCreateData({
       savivaldybe_id: savivaldybe,
       sritis_id: sritis,

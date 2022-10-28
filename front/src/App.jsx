@@ -34,7 +34,7 @@ function App() {
       setMessages((prevMessages) =>
         prevMessages.filter((m) => m.id !== message.id)
       );
-    }, 4000);
+    }, 5000);
   }, []);
 
   return (

@@ -20,8 +20,8 @@ const CreateSav = () => {
   };
 
   const addSavivaldybe = () => {
-    if (title.length === 0 || title.length > 50) {
-      setMsg("Invalid title");
+    if (title.length === 0 || title.length > 30) {
+      setMsg("Neteisingai įvedėte pavadinimą");
       return;
     } else {
       setCreateData({

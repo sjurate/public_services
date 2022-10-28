@@ -17,7 +17,7 @@ const Messages = () => {
       {messages.map((m) => (
         <div key={m.id} className="toast show" role="alert">
           <div className="toast-header">
-            <strong className="me-auto">Siuvykla</strong>
+            <strong className="me-auto">Klaida</strong>
             <button
               onClick={() => closeMsg(m.id)}
               type="button"
