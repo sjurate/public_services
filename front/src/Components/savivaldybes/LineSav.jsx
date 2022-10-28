@@ -6,20 +6,22 @@ const LineSav = ({ savivaldybe }) => {
 
   return (
     <li className="list-group-item">
-      <div className="line">
-        <div className="line__content">
-          <div className="line__content__image">
+      <div className="line__content">
+        <div className="line__content__savivaldybe">
+          <div className="line__image">
             {savivaldybe.image ? (
-              <div className="img-bin">
-                <img src={savivaldybe.image} alt={savivaldybe.title}></img>
-              </div>
+              <img
+                className="line__image"
+                src={savivaldybe.image}
+                alt={savivaldybe.title}
+              ></img>
             ) : (
               <span className="red-image">No image</span>
             )}
           </div>
           <div className="line__content__info">
             <h3 className="line__content__title">{savivaldybe.title}</h3>
-            <div className="home__buttons">
+            <div className="btn__box">
               <button
                 type="button"
                 className="btn btn-outline-success"

@@ -60,7 +60,6 @@ const EditSav = () => {
               className="btn-close"
             ></button>
           </div>
-          <div className="modal-body"></div>
           <div className="card m-4">
             <div className="card-body">
               <div className="mb-3">

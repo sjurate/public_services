@@ -56,6 +56,7 @@ const MainKomentarai = () => {
       value={{
         setKomentaras,
         komentarai,
+        setKomentarai,
         setDeleteData,
       }}
     >

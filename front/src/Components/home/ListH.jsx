@@ -89,18 +89,14 @@ const ListH = () => {
               ))}
             </select>
           </div>
-          {/* <button className="btn btn-outline-success" onClick={filtruoti}>
-            Filtruoti
-          </button> */}
         </div>
       </div>
       <div className="card m-4">
         <h5 className="card-header">Komentarai:</h5>
-        <div className="card-small-info">
-          <small onClick={resetFilter} className="click-link">
-            (rodyti visus komentarus)
-          </small>
-        </div>
+
+        <small onClick={resetFilter} className="click-link reset-filter">
+          rodyti visus komentarus
+        </small>
         <div className="card-body">
           <ul className="list-group">
             {komentarai?.map((k) =>

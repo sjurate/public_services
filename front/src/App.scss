@@ -16,16 +16,17 @@
     display: flex;
     justify-content: space-between;
     padding: 15px;
-    & .line__content__savivaldybe {
-      display: flex;
-      & .line__image {
-        width: auto;
-        height: 60px;
-        contain: content;
-      }
-      & .savivaldybe_title {
-        margin-left: 15px;
-      }
+  }
+  & .line__content__savivaldybe {
+    display: flex;
+    width: 100%;
+    & .line__image {
+      width: auto;
+      height: 60px;
+      contain: content;
+    }
+    & .savivaldybe_title {
+      margin-left: 15px;
     }
   }
   & .line__content__post {
@@ -48,6 +49,26 @@
 
 .click-link {
   cursor: pointer;
+  & :hover {
+    color: orange;
+  }
+}
+
+.reset-filter {
+  width: 200px;
+  margin: 5px;
+  margin-top: 10px;
+  padding: 2px 5px;
+  border: 1px solid darkgreen;
+  color: darkgreen;
+  text-transform: capitalize;
+  text-align: center;
+}
+
+.reset-filter:hover {
+  color: white;
+  background-color: darkgreen;
+  border: 1px solid white;
 }
 
 .no-image {
@@ -55,6 +76,12 @@
   color: grey;
   border: solid 1px grey;
   padding: 3px 5px;
+}
+
+.btn__box {
+  & > * {
+    margin-left: 5px;
+  }
 }
 
 .msg-bin {
@@ -66,4 +93,26 @@
     display: block;
     margin: 10px;
   }
+}
+
+.comment-id {
+  font-weight: 400;
+  font-size: 20px;
+}
+
+.comment-details {
+  color: purple;
+  font-size: 18px;
+  line-height: 24px;
+}
+
+.comment-post {
+  border: dotted 2px orange;
+  width: 100%;
+  padding: 0 15px 15px 15px;
+  margin: 10px 5px;
+}
+
+.comment-status {
+  margin: 5px;
 }

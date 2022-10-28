@@ -16,43 +16,41 @@ const LineKom = ({ komentaras }) => {
   };
 
   return (
-    <li className="list-group-item">
-      <ul className="comment">
-        <li key={komentaras.id} className="list-group-item">
-          <h3>Komentaras # {komentaras.id}</h3>
+    <li key={komentaras.id} className="list-group-item">
+      <div className="comment-id">Komentaras # {komentaras.id}</div>
 
-          <div className="comment-details">
-            <div>{komentaras.savivaldybeTitle}</div>
-            <div>{komentaras.sritisTitle}</div>
-          </div>
-          <div className="comment-post">
-            <div>{komentaras.post}</div>
-          </div>
-          <div className="comment-status">
-            {komentaras.status === 0 ? (
-              <div>Nepatvirtintas</div>
-            ) : (
-              <div style={{ color: "green" }}>Patvirtintas</div>
-            )}
-          </div>
-          <div className="manage-comment-btns">
-            <button
-              onClick={() => approve(komentaras.id)}
-              type="button"
-              className="btn btn-outline-success"
-            >
-              Patvirtinti
-            </button>
-            <button
-              onClick={() => remove(komentaras.id)}
-              type="button"
-              className="btn btn-outline-danger"
-            >
-              Ištrinti
-            </button>
-          </div>
-        </li>
-      </ul>
+      <div className="comment-details">
+        <div>{komentaras.savivaldybeTitle}</div>
+        <div>{komentaras.sritisTitle}</div>
+      </div>
+      <div className="comment-post">
+        <div>{komentaras.post}</div>
+      </div>
+      <div className="comment-status">
+        {komentaras.status === 0 ? (
+          <div style={{ color: "crimson" }}>Nepatvirtintas</div>
+        ) : (
+          <div style={{ color: "green" }}>Patvirtintas</div>
+        )}
+      </div>
+      {komentaras.status === 0 ? (
+        <div className="btn__box">
+          <button
+            onClick={() => approve(komentaras.id)}
+            type="button"
+            className="btn btn-outline-success"
+          >
+            Patvirtinti
+          </button>
+          <button
+            onClick={() => remove(komentaras.id)}
+            type="button"
+            className="btn btn-outline-danger"
+          >
+            Ištrinti
+          </button>
+        </div>
+      ) : null}
     </li>
   );
 };

@@ -10,7 +10,7 @@ const LineSritis = ({ sritis }) => {
         <div className="line__content">
           <div className="line__content__info">
             <h3 className="line__content__title">{sritis.title}</h3>
-            <div className="home__buttons">
+            <div className="btn__box">
               <button
                 type="button"
                 className="btn btn-outline-success"
