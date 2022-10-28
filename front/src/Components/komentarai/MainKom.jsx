@@ -14,7 +14,7 @@ const MainKomentarai = () => {
     axios
       .get("http://localhost:3003/server/komentarai", authConfig())
       .then((res) => {
-        setKomentarai(res.data);
+        setKomentarai(res.data.map((d, i) => ({ ...d, show: true, row: i })));
       });
   }, [lastUpdate]);
 

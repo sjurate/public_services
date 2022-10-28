@@ -3,9 +3,9 @@ import KomentaraiContext from "../../Contexts/KomentaraiContext";
 import LineKom from "./LineKom";
 
 const ListKom = () => {
-  const [status, setStatus] = useState(3);
-
   const { komentarai, setKomentarai } = useContext(KomentaraiContext);
+
+  const [status, setStatus] = useState("3");
 
   console.log(komentarai);
 
@@ -38,7 +38,9 @@ const ListKom = () => {
               value={status}
               onChange={(e) => setStatus(e.target.value)}
             >
-              <option value={3} default>Visi</option>
+              <option value={3} defaultValue>
+                Visi
+              </option>
               <option value={0}>Nepatvirtinti</option>
               <option value={1}>Patvirtinti</option>
             </select>
