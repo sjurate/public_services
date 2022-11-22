@@ -21,7 +21,6 @@ const ListKom = () => {
         )
       );
     }
-    console.log(status);
   }, [status, setKomentarai]);
 
   return (
